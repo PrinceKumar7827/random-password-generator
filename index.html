@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #input {
+            width: 500px;
+        }
+        body {
+            /* background-color: red; */
+            user-select: none;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+    <input id="input" type="text" disabled><br>
+    <input type="range" name="range" id="range" max="30" value="5" min="5">
+    <label for="range">Choose password strength</label><br>
+    <input type="checkbox" name="numbers" id="num">
+    <label for="num">number</label><br>
+    <input type="checkbox" name="smallLetter" id="smallLetter">
+    <label for="smallLetter">small</label><br>
+    <input type="checkbox" name="capitalLetter" id="capitalLetter">
+    <label for="capitalLetter">big</label><br>
+    <input type="checkbox" name="symbols" id="symbols">
+    <label for="symbols">symbols</label><br>
+    <button id="btn">generate</button>
+
+    <script>
+        // random password generator
+
+
+let btn = document.querySelector("#btn");
+let input = document.querySelector("#input");
+let sm = document.querySelector("#smallLetter");
+let cp = document.querySelector("#capitalLetter");
+let nm = document.querySelector("#num");
+let sym = document.querySelector("#symbols");
+let range = document.querySelector("#range");
+
+btn.addEventListener(("click"), () => {
+    createPassword();
+})
+
+// input.value 
+
+
+
+// let passwordSmall = false;
+// let passwordCapital = false;
+// let passwordNumbers = true;
+// let passwordSymbols = false;
+
+function createPassword() {
+    let passwordLength = range.value;
+    let small = "abcdefghijklmnopqrstuvwxyz";
+    let capital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let numbers = "1234567890";
+    let symbols = "!@#$%^&*()_+=-':;<>,.?/[]{}\₹|`~";
+
+    let concatenatedString = "";
+    let generatedPassword = "";
+
+
+    if(!sm.checked && !cp.checked && !nm.checked && !sym.checked) {
+        // console.log("please select at least one category");
+        alert("please select at least one category")
+    } else {
+
+        
+        if(sm.checked) {
+            concatenatedString += small;
+        }
+        if(cp.checked) {
+            concatenatedString += capital;
+        }
+        if(nm.checked) {
+            concatenatedString += numbers;
+        }
+        if(sym.checked) {
+            concatenatedString += symbols;
+        }
+        
+        // console.log(concatenatedString.length);
+        for(let i = 0; i < passwordLength; i++) {
+            let iterator = Math.floor(Math.random() * concatenatedString.length);
+            generatedPassword += concatenatedString[iterator];
+        }
+        // console.log(generatedPassword);
+        input.value = generatedPassword;
+        // console.log(range.value);
+    }
+}
+// createPassword();
+
+// let a = Math.floor(Math.random() * 5);
+// console.log(a);
+    </script>
+</body>
+</html>
